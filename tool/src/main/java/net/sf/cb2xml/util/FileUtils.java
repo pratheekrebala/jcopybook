@@ -1,5 +1,5 @@
 /*************************************************************
- * This file is part of CB2XML.  
+ * This file is part of CB2XML.
  * See the file "LICENSE" for copyright information and the
  * terms and conditions for copying, distribution and
  * modification of CB2XML.
@@ -8,6 +8,7 @@
 
 package net.sf.cb2xml.util;
 
+import java.util.stream.Stream;
 import java.io.*;
 
 /**
@@ -21,6 +22,12 @@ public class FileUtils {
 		InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream(fileName);
 		if (stream == null) stream = new FileInputStream(fileName);
 		if (stream == null) throw new FileNotFoundException("resources not found: " + fileName);
+		return stream;
+	}
+
+	public static Stream stdin() {
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		Stream<String> stream = in.lines();
 		return stream;
 	}
 

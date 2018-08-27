@@ -3,3 +3,5 @@
 target
 maven-plugin
 maven-plugin-example
+/.DS_Store
+/.project
