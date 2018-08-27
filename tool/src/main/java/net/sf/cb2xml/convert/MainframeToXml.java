@@ -1,5 +1,5 @@
 /*************************************************************
- * This file is part of CB2XML.  
+ * This file is part of CB2XML.
  * See the file "LICENSE" for copyright information and the
  * terms and conditions for copying, distribution and
  * modification of CB2XML.
@@ -120,7 +120,8 @@ public class MainframeToXml {
 				}
 			}
 			if (childElementCount == 0 && !"true".equals(element.getAttribute("redefined"))) {
-				text = mainframeBuffer.substring(context.offset, context.offset + length);
+				if(mainframeBuffer.length() >= (context.offset + length)) text = mainframeBuffer.substring(context.offset, context.offset + length);
+				else text = "OOB";
 				if ("true".equals(element.getAttribute("numeric"))) {
 					String textForNumeric = text.trim();
 					if (textForNumeric.isEmpty()) {
