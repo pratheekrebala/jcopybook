@@ -94,6 +94,7 @@ public class MainframeToXml {
 		Element resultElement = resultDocument.createElement(resultElementName);
 		try {
 			int length = Integer.parseInt(element.getAttribute("display-length"));
+			int position = Integer.parseInt(element.getAttribute("position"));
 			int childElementCount = 0;
 			NodeList nodeList = element.getChildNodes();
 			for (int i = 0; i < nodeList.getLength(); i++) {
@@ -120,8 +121,11 @@ public class MainframeToXml {
 				}
 			}
 			if (childElementCount == 0 && !"true".equals(element.getAttribute("redefined"))) {
-				if(mainframeBuffer.length() >= (context.offset + length)) text = mainframeBuffer.substring(context.offset, context.offset + length);
-				else text = "OOB";
+				if(mainframeBuffer.length() < ((position - 1) + length)) {
+					int missingChars = ((position - 1) + length) - mainframeBuffer.length();
+					mainframeBuffer = mainframeBuffer + StringUtils.repeat(" ", missingChars);
+				}
+				text = mainframeBuffer.substring((position - 1), (position - 1) + length);
 				if ("true".equals(element.getAttribute("numeric"))) {
 					String textForNumeric = text.trim();
 					if (textForNumeric.isEmpty()) {
