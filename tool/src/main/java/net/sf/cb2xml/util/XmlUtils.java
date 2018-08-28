@@ -22,6 +22,8 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 import java.io.InputStream;
 import java.io.StringWriter;
+import org.json.XML;
+import org.json.JSONObject;
 
 /**
  * quick and easy XML utilities to ease the trouble of DOM parsing, XSL transformations
@@ -40,6 +42,10 @@ public class XmlUtils {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public static JSONObject JSONResponse(StringBuffer string) {
+		return XML.toJSONObject(string.toString());
 	}
 
 	public static StringBuffer domToString(Document document) {
